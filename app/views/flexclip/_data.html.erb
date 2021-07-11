@@ -1,0 +1,12 @@
+<% @res.each do |res| %>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail" style="height: 240px">
+        <%= image_tag(res['thumbnail_url'], onclick: "download(#{res['id']})", style: "cursor: pointer")%>
+
+        <div style="font-size: 12px; text-align: center" class="video-<%= res['id'] %>">
+          <br>
+          <%= truncate(res['title'], length:35)  %>
+        </div>
+      </div>
+    </div>
+<% end %>

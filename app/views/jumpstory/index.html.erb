@@ -1,0 +1,56 @@
+<h3>Jumpstory Videos</h1>
+<div style="margin-left: 20px">
+  <div class="row">
+    <div class="col-md-6">
+      <%= form_with url: jumpstory_path, method: :get, data: { turbolinks: false } do |form| %>
+        <%= form.label :query, "Search for:" %>
+        <%= form.text_field :query, value: params[:query], style: 'width: 400px' %>
+        <%= form.submit "Search" %>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <div class="col-md-8">
+        <p>Page: <%= @page %></p>
+      </div>
+      <div class="col-md-4">
+        <div class="col-md-6">
+          <%= link_to :previous, jumpstory_path(query: params[:query], page: @page.to_i - 1, type: params[:type]), class: 'btn btn-primary', style: 'width: 100px' if @page.to_i > 1 %>
+        </div>
+        <div class="col-md-5">
+          <%= link_to :next, jumpstory_path(query: params[:query], page: @page.to_i + 1, type: params[:type]), class: 'btn btn-primary', style: 'width: 100px' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="row">
+    <% @res['data']['res_data'].each do |data| %>
+      <%= link_to "https://vidair-api.wondershare.com/resource/external/jumpstory/videos/#{data['res_id']}", target: '_blank' do %>
+        <div class="col-md-3" style="margin-bottom: 20px">
+          <div style="border: 5px white solid">
+            <%= image_tag(data['thumb'], size: '415x220') %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <hr>
+
+  <div class="col-md-6"></div>
+  <div class="col-md-6">
+    <div class="col-md-8">
+      <p>Total: <%= @res['total_count'] %>, Page: <%= @page %></p>
+    </div>
+    <div class="col-md-4">
+      <div class="col-md-6">
+        <%= link_to :previous, jumpstory_path(query: params[:query], page: @page.to_i - 1, type: params[:type]), class: 'btn btn-primary', style: 'width: 100px' %>
+      </div>
+      <div class="col-md-5">
+        <%= link_to :next, jumpstory_path(query: params[:query], page: @page.to_i + 1, type: params[:type]), class: 'btn btn-primary', style: 'width: 100px' %>
+      </div>
+    </div>
+  </div>
+</div>

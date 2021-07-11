@@ -1,0 +1,49 @@
+<div class="row" style="margin-top: 15px">
+  <div class="col-md-7">
+    <video
+      class="video-js"
+      controls
+      preload="none"
+      width="705"
+      height="400"
+      poster="<%= params[:thumbnailUrl] %>"
+      data-setup="{}"
+    >
+      <source src="<%= params[:previewUrl] %>" type="video/mp4" />
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a
+        web browser that
+        <a href="https://videojs.com/html5-video-support/" target="_blank"
+        >supports HTML5 video</a
+        >
+      </p>
+    </video>
+  </div>
+  <div class="col-md-5">
+    <p style="font-size: 16px">
+      <b>
+        <%= params[:title].capitalize %>
+      </b>
+    </p>
+    <p style="font-size: 12px"><%= params[:description].capitalize %></p>
+    <div style="font-size: 12px">
+      <%= link_to 'High Download', @download['info']['url'], class: 'btn btn-default' %>
+      <%= link_to 'Low Resulation', params[:previewUrl], download: params[:title], class: 'btn btn-default', target: '_blank' %>
+      <p style="font-size: 15px; margin-bottom: 0; margin-top: 5px"><b>More Resulation</b></p>
+      <%= render 'download_more' %>
+    </div>
+    <p style="margin-top: 20px">Related Keywords:</p>
+    <div style="font-size: 12px">
+      <% params[:keywords].each do |keyword| %>
+        <%= link_to keyword.capitalize, clipchamp_videos_path(query: keyword), style: 'font-size: 14px' %>,
+    <% end %>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <p>Related Video</p>
+  </div>
+  <%= render 'video_data' %>
+</div>

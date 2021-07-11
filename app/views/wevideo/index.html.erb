@@ -1,0 +1,53 @@
+<div class="row video-class">
+  <% @res['data'].each do |data| %>
+    <%= link_to data['preview_url'], target: '_blank' do%>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail" style="height: 220px">
+          <%= image_tag(data['thumbnail_url'], size: '320x180')%>
+          <br>
+          <p style="font-size: 12px; text-align: center">
+            <%= truncate(data['title'], length:35)  %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+    var page = 2;
+    var type = '<%= params[:type].present? ? params[:type] : 'video' %>'
+    $(window).scroll(function() {
+        if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            var lastId = $(".well:last").attr("id");
+            $.ajax({
+                url: `<%= "#{url_path}?query=#{params[:query]}"%>&page=${page}&type=${type}`,
+                type: "get",
+                dataType: "json",
+                beforeSend: function (){
+                    $('.ajax-loader').show();
+                },
+                success: function (data) {
+                    for (let i = 0; i < data['res']['data'].length; i++) {
+                        htm = `
+                                <a target="_blank" href="${data['res']['data'][i]['preview_url']}">
+                                  <div class="col-sm-6 col-md-3">
+                                    <div class="thumbnail" style="height: 220px">
+                                      <img src="${data['res']['data'][i]['thumbnail_url']}">
+                                      <br>
+                                      <p style="font-size: 12px; text-align: center">
+                                          ${data['res']['data'][i]['title'].substring(0, 35)}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </a>
+                              `
+                        $(".video-class").append(htm);
+                    }
+                    page++;
+                }
+            });
+        }
+    });
+</script>
+

@@ -1,0 +1,24 @@
+<%= link_to 'Refresh', temporary_phone_number_inbox_path(phone: params[:phone], refer: params[:refer]) %>
+<h3>Temporary Phone Number: +<%= params[:phone] %></h3>
+<br>
+<div class="row">
+  <%  @res.each do |msg| %>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail" style="height: 250px; padding: 10px">
+          <%= msg['mesaje_id'] %>
+          <br>
+          <p style="font-size: 10px">
+            <%= msg['telefon'] %>
+          </p>
+          <br>
+          <p style="font-size: 14px">
+            Message: <%= msg['mesaj'] %>
+          </p>
+          <br>
+          <p style="font-size: 14px">
+            Data: <%= msg['data'] %>
+          </p>
+        </div>
+      </div>
+  <% end %>
+</div>

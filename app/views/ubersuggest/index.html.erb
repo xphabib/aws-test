@@ -1,0 +1,44 @@
+<table class="table table-hover table-dark">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">KEYWORD</th>
+    <th scope="col">Action</th>
+    <th scope="col">VOLUME</th>
+    <th scope="col">CPC</th>
+    <th scope="col">PAID DIFFICULTY</th>
+    <th scope="col">SEO DIFFICULTY</th>
+    <th scope="col">Competition</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @res['suggestions'].each_with_index do |suggestion, index| %>
+    <tr>
+      <th scope="row"><%= index + 1 %></th>
+      <td><%= suggestion['keyword'] %></td>
+      <td style="cursor: pointer">
+        <span class="keyword-<%= index %>" onclick="copyToClipboard('<%= suggestion['keyword'] %>', '<%= index %>')">Copy</span> |
+        <%= link_to 'More info', ubersuggest_path(query: suggestion['keyword']) %>
+      </td>
+      <td><%= suggestion['volume'] %></td>
+      <td><%= suggestion['cpc'] %>$</td>
+      <td><%= suggestion['pd'] %></td>
+      <td><%= suggestion['sd'] %></td>
+      <td><%= suggestion['competition'] %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<script type="text/javascript" charset="utf-8">
+    function copyToClipboard(text, index) {
+        navigator.clipboard.writeText(text).then(function() {
+            console.log('Async: Copying to clipboard was successful!');
+            console.log($(this));
+            $(this).html("Copied!");
+            $(`.keyword-${index}`).html("<b>copied</b>!");
+        }, function(err) {
+            console.error('Async: Could not copy text: ', err);
+        });
+    }
+</script>

@@ -1,0 +1,27 @@
+<div class="row">
+  <%= render 'suggestions' %>
+</div>
+<br>
+<div class="row video-class">
+  <%= render 'data' %>
+</div>
+<div class="row" style="text-align: center">
+  <button class="btn btn-default" onclick="load_more()">Load More</button>
+</div>
+
+<script type="text/javascript">
+    function download(video_id) {
+        $(`.video-${video_id}`).html("<br>Loading...");
+        $.ajax({
+            url: `<%= "#{flexclip_download_path}"%>?video_id=${video_id}`,
+            type: "get",
+            dataType: "script",
+            beforeSend: function (){
+                $('.ajax-loader').show();
+            },
+            success: function (data) {
+                console.log('success');
+            }
+        });
+    }
+</script>

@@ -1,0 +1,19 @@
+<% if @res.present? %>
+  <h4>
+    <b>
+      Title:
+    </b> <%= @res['data']['items'].first['snippet']['title'] %>
+  </h4>
+
+  <b>Tags:</b>
+  <hr>
+
+  <% @res['data']['items'].first['snippet']['tags'].each do |tag| %>
+    <b><%= tag %></b> <span> | </span>
+  <% end %>
+  <br>
+  <hr>
+  <% @res['data']['items'].first['snippet']['tags'].each do |tag| %>
+    <b>'<%= tag %>'</b> <span>, </span>
+  <% end %>
+<% end %>

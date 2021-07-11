@@ -1,0 +1,67 @@
+<div style="margin-left: 20px">
+  <h3>Wevideo version</h3>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form_with url: storyblocks_path, method: :get, data: { turbolinks: false } do |form| %>
+        <%= form.label :query, "Search for:" %>
+        <%= form.text_field :query, value: params[:query], style: 'width: 400px' %>
+        <%= form.submit "Search" %>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <div class="col-md-8">
+        <p>Total: <%= @res['total_results'] %>, Page: <%= @page %></p>
+      </div>
+      <div class="col-md-4">
+        <div class="col-md-6">
+          <%= link_to :previous, storyblocks_path(query: params[:query], page: @page.to_i - 1, type: params[:type]), class: 'btn btn-primary', style: 'width: 100px' if @page.to_i > 1 %>
+        </div>
+        <div class="col-md-5">
+          <%= link_to :next, storyblocks_path(query: params[:query], page: @page.to_i + 1, type: params[:type]), class: 'btn btn-primary', style: 'width: 100px' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="row">
+    <% @res['results'].each do |data| %>
+        <div class="col-md-3" style="margin-bottom: 20px">
+          <div style="border: 5px white solid">
+            <%= link_to data['preview_urls']['_720p'], target: '_blank' do %>
+              <%= image_tag(data['thumbnail_url'], size: '415x220') %>
+            <% end %>
+          </div>
+          <div style="font-size: 15px; padding-left: 20px">
+            <b><%= truncate(data['title'], length:50)  %></b>
+          </div>
+          <div style="font-size: 15px; padding-left: 20px">
+            <%= link_to '180p', data['preview_urls']['_180p'], target: '_blank', class: 'btn btn-primary'%>
+            <%= link_to '360p', data['preview_urls']['_360p'], target: '_blank', class: 'btn btn-primary'%>
+            <%= link_to '480p', data['preview_urls']['_480p'], target: '_blank', class: 'btn btn-primary'%>
+            <%= link_to '720p', data['preview_urls']['_720p'], target: '_blank', class: 'btn btn-primary'%>
+          </div>
+        </div>
+    
+    <% end %>
+  </div>
+
+  <hr>
+
+  <div class="col-md-6"></div>
+  <div class="col-md-6">
+    <div class="col-md-8">
+      <p>Total: <%= @res['total_results'] %>, Page: <%= @page %></p>
+    </div>
+    <div class="col-md-4">
+      <div class="col-md-6">
+        <%= link_to :previous, storyblocks_path(query: params[:query], page: @page.to_i - 1, type: params[:type]), class: 'btn btn-primary', style: 'width: 100px' %>
+      </div>
+      <div class="col-md-5">
+        <%= link_to :next, storyblocks_path(query: params[:query], page: @page.to_i + 1, type: params[:type]), class: 'btn btn-primary', style: 'width: 100px' %>
+      </div>
+    </div>
+  </div>
+</div>

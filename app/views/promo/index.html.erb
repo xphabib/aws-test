@@ -1,0 +1,35 @@
+<div class="row video-class">
+  <% @res['response']['body']['videos'].each do |res| %>
+    <%= link_to res['previewUrl'], target: '_blank' do%>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail" style="height: 220px">
+          <%= image_tag(res['thumbnailUrl'])%>
+          <br>
+          <p style="font-size: 12px; text-align: center">
+            <%= truncate(res['title'], length:35)  %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+    var page = 2;
+    $(window).scroll(function() {
+        if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            var lastId = $(".well:last").attr("id");
+            $.ajax({
+                url: `<%= "#{url_path}?query=#{params[:query]}"%>&page=${page}`,
+                type: "get",
+                dataType: "script",
+                beforeSend: function (){
+                    $('.ajax-loader').show();
+                },
+                success: function (data) {
+                    page++;
+                }
+            });
+        }
+    });
+</script>

@@ -1,0 +1,2 @@
+class CollectedBlog < ApplicationRecord
+end

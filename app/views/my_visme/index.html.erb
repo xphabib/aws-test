@@ -1,0 +1,51 @@
+<div class="row video-class">
+  <% @res['videos'].each do |res| %>
+    <%= link_to(my_visme_download_path(video_id: res['id']), 'data-popup' => true, :onclick=>"window.open(this.href,'quick_help', 'height=300, width=500'); return false;") do%>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail" style="height: 220px">
+          <%= image_tag(res['thumbnail'])%>
+          <br>
+          <p style="font-size: 12px; text-align: center">
+            <%= truncate(res['title'], length:35)  %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+    var page = 2;
+    $(window).scroll(function() {
+        if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            var lastId = $(".well:last").attr("id");
+            $.ajax({
+                url: `<%= "#{url_path}?query=#{params[:query]}"%>&page=${page}`,
+                type: "get",
+                dataType: "json",
+                beforeSend: function (){
+                    $('.ajax-loader').show();
+                },
+                success: function (data) {
+                    for (let i = 0; i < data['res']['videos'].length; i++) {
+                        htm = `
+                                <a data-popup="true" onclick="window.open(this.href,'quick_help', 'height=300, width=500'); return false;" href="/my-visme-download?video_id=${data['res']['videos'][i]['id']}">
+                                  <div class="col-sm-6 col-md-3">
+                                    <div class="thumbnail" style="height: 220px">
+                                      <img src="${data['res']['videos'][i]['thumbnail']}">
+                                      <br>
+                                      <p style="font-size: 12px; text-align: center">
+                                          ${data['res']['videos'][i]['title'].substring(0, 35)}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </a>
+                              `
+                        $(".video-class").append(htm);
+                    }
+                    page++;
+                }
+            });
+        }
+    });
+</script>

@@ -1,0 +1,13 @@
+<% @res['results'].each do |res| %>
+  <%= link_to res['video']['render_url'], target: '_blank' do%>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail" style="height: 220px">
+        <%= image_tag(res['video']['poster_url'])%>
+        <br>
+        <p style="font-size: 12px; text-align: center">
+          <%= truncate(res['video']['title'], length:35)  %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+<% end %>

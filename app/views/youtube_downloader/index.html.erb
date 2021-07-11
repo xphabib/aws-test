@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-11">
+    <%= form_with url: youtube_downloader_path, method: :get, data: { turbolinks: false } do |form| %>
+      <%= form.text_field :youtube_url, value: params[:youtube_url], placeholder: 'yutube url', style: 'width: 400px' %>
+      <%= form.submit "Download" %>
+    <% end %>
+  </div>
+
+  <br>
+  <br>
+  <%if @res.present? %>
+    <div class="col-md-6" style="margin: auto">
+      <%= image_tag(@res['thumbnail']) if @res['thumbnail'].present? %>
+      <br>
+      <%= @res['title'] %>
+      <br>
+      duration: <%= @res['duration'] %>
+      <br>
+      <h4>MP4 Video only</h4>
+      <% @res['formats']['mp4-video-only'].each do |video| %>
+        <%= link_to video['title'], video['url'], class: 'btn btn-primary', target: '_blank' %>
+      <% end %>
+      <br>
+      <h4>MP3 only</h4>
+      <% @res['formats']['mp3'].each do |audio| %>
+        <%= link_to audio['title'], audio['url'], class: 'btn btn-primary', target: '_blank' %>
+      <% end %>
+      <br>
+      <h4>MP4</h4>
+      <% @res['formats']['mp4'].each do |video| %>
+        <%= link_to video['title'], video['url'], class: 'btn btn-primary', target: '_blank' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

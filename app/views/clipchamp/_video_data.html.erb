@@ -1,0 +1,30 @@
+<% @res.each do |video| %>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="text-align: center">
+      <video
+        id="video-<%= video['id'] %>"
+        class="video-js"
+        controls
+        preload="none"
+        width="390"
+        height="300"
+        poster="<%= video['thumbnailUrl'] %>"
+        data-setup="{}"
+      >
+        <source src="<%= video['previewUrl'] %>" type="video/mp4" />
+        <p class="vjs-no-js">
+          To view this video please enable JavaScript, and consider upgrading to a
+          web browser that
+          <a href="https://videojs.com/html5-video-support/" target="_blank"
+          >supports HTML5 video</a
+          >
+        </p>
+      </video>
+      <div style="font-size: 12px; text-align: center" class="video-<%= video['id'] %>">
+        <br>
+        <%= link_to(truncate(video['title'], length:35), video_show_path(id: video['id'], vid: video['vendorId'], thumbnailUrl: video['thumbnailUrl'], previewUrl: video['previewUrl'], title: video['title'], description: video['description'], keywords: video['keywords'])) %>
+      </div>
+    </div>
+  </div>
+<% end %>
+

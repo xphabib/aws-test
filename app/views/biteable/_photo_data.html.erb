@@ -1,0 +1,15 @@
+<% @res['results'].each do |res| %>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 280px">
+      <%= link_to res['urls']['full'], target: '_blank' do%>
+        <%= image_tag(res['urls']['thumb'], style: 'height: 230px')%>
+      <% end %>
+      <div style="text-align: center; margin-top: 5px">
+        <%= link_to 'Raw', res['urls']['raw'], target: '_blank', class: 'btn btn-primary' %>
+        <%= link_to 'Full', res['urls']['full'], target: '_blank', class: 'btn btn-primary' %>
+        <%= link_to 'Regular', res['urls']['regular'], target: '_blank', class: 'btn btn-primary' %>
+        <%= link_to 'Small', res['urls']['small'], target: '_blank', class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>

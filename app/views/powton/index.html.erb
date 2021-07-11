@@ -1,0 +1,45 @@
+<div class="btn-group" role="group" aria-label="...">
+  <%= link_to 'Storyblocks', powton_path(blocks_type: 'storyblocks', query: params[:query]), class: "btn btn-default" %>
+  <%= link_to 'Technologystoryblocks', powton_path(blocks_type: 'technologystoryblocks', query: params[:query]), class: "btn btn-default" %>
+  <%= link_to 'Businessstoryblocks', powton_path(blocks_type: 'businessstoryblocks', query: params[:query]), class: "btn btn-default" %>
+  <%= link_to 'Holidaysstoryblocks', powton_path(blocks_type: 'holidaysstoryblocks', query: params[:query]), class: "btn btn-default" %>
+  <%= link_to 'Naturestoryblocks', powton_path(blocks_type: 'naturestoryblocks', query: params[:query]), class: "btn btn-default" %>
+  <%= link_to 'Peoplestoryblocks', powton_path(blocks_type: 'peoplestoryblocks', query: params[:query]), class: "btn btn-default" %>
+</div>
+<br>
+<br>
+<div class="row video-class">
+  <% @res['results'].each do |res| %>
+    <%= link_to(powton_download_path(video_info: res, blocks_type: params[:blocks_type]), 'data-popup' => true, :onclick=>"window.open(this.href,'quick_help', 'height=300, width=500'); return false;") do%>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail" style="height: 220px">
+          <%= image_tag(res['thumb_url'])%>
+          <br>
+          <p style="font-size: 12px; text-align: center">
+            <%= truncate(res['name'], length:35)  %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+    var page = 2;
+    $(window).scroll(function() {
+        if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            var lastId = $(".well:last").attr("id");
+            $.ajax({
+                url: `<%= "#{url_path}?query=#{params[:query]}&blocks_type=#{params[:blocks_type]}"%>&page=${page}`,
+                type: "get",
+                dataType: "script",
+                beforeSend: function (){
+                    $('.ajax-loader').show();
+                },
+                success: function (data) {
+                    page++;
+                }
+            });
+        }
+    });
+</script>

@@ -1,0 +1,17 @@
+<h3>Temporary Phone</h3>
+<br>
+<div class="row">
+  <%  @arr.each do |phone| %>
+    <%= link_to(temporary_phone_number_inbox_path(phone: phone[:number], refer: phone[:referer]), target: '_blank') do%>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail" style="height: 60px; padding: 10px">
+          <%= phone[:country] %>
+          <br>
+          <p style="font-size: 12px">
+            <%= phone[:number] %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

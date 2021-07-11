@@ -1,0 +1,33 @@
+<% unless controller.controller_name=='youtube_downloader' || controller.controller_name=='tempmail'%>
+  <%= form_with url: url_path, method: :get, data: { turbolinks: false }, class: 'navbar-form navbar-left' do |form| %>
+    <div class="form-group">
+      <%= form.text_field :query, value: params[:query], placeholder: 'Search', class: "form-control" %>
+    </div>
+
+    <% if controller.controller_name=='wevideo' %>
+      <div class="form-group">
+        <%= select_tag("type", options_for_select(AppSetting::TYPE, params[:type]), class: "form-control")%>
+      </div>
+    <% end %>
+
+    <% if controller.controller_name=='powton' %>
+      <div class="form-group">
+        <%= hidden_field_tag(:blocks_type, params[:blocks_type])%>
+      </div>
+    <% end %>
+
+    <%= form.submit "Search", class: 'btn btn-default' %>
+  <% end %>
+<% end %>
+
+<ul class="nav navbar-nav navbar-right">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="#"><%= current_user.email %></a></li>
+      <li role="separator" class="divider"></li>
+      <li><%= link_to('Logout', destroy_user_session_path, :method => :delete)  %></li>
+
+    </ul>
+  </li>
+</ul>

@@ -1,0 +1,15 @@
+<h3>Blog Sites</h3>
+<br>
+<div class="row">
+  <%  @collected_blogs.each do |blog| %>
+    <%= link_to blog.link, target: '_blank' do%>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail" style="height: 60px; padding: 10px">
+          <p style="font-size: 12px">
+            <%= blog.title %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

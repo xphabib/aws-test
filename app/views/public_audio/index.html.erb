@@ -1,0 +1,24 @@
+<div class="row video-class">
+  <%= render 'audio_data' %>
+</div>
+
+<script type="text/javascript">
+    var offset = 20
+    var limit = 40
+    $(window).scroll(function() {
+        if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            var lastId = $(".well:last").attr("id");
+            $.ajax({
+                url: `<%= "#{url_path}?query=#{params[:query]}"%>&offset=${offset}&limit=${limit}`,
+                type: "get",
+                dataType: "script",
+                beforeSend: function (){
+                    $('.ajax-loader').show();
+                },
+                success: function (data) {
+                    console.log('success');
+                }
+            });
+        }
+    });
+</script>

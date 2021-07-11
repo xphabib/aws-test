@@ -1,0 +1,31 @@
+<div class="row" style="margin-top: 7px">
+  <div class="col-md-3 col-sm-3 dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      MOV
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <% @data['json']['MOV'].each do |key, value| %>
+        <li>
+          <%= link_to "MOV#{key}", value, target: '_blank' %>
+        </li>
+      <% end %>
+      <li role="separator" class="divider"></li>
+    </ul>
+  </div>
+
+  <div class="col-md-3 col-sm-3 dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      MP4
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <% @data['json']['MP4'].each do |key, value| %>
+        <li>
+          <%= link_to "MP4#{key}", value, target: '_blank' %>
+        </li>
+      <% end %>
+      <li role="separator" class="divider"></li>
+    </ul>
+  </div>
+</div>

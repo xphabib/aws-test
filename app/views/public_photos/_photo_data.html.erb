@@ -1,0 +1,9 @@
+<% @res.each do |res| %>
+  <%= link_to res['links']['download_url'], target: '_blank' do%>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail" style="height: 270px">
+        <%= image_tag(res['links']['thumb_url'], style: 'height: 250px')%>
+      </div>
+    </div>
+  <% end %>
+<% end %>

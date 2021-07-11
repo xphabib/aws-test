@@ -1,0 +1,11 @@
+$(".video-class").append("<%= escape_javascript(render 'data').html_safe %>");
+var istock_offset = <%= @res['apis_video_count']['istock']['offset'] %>;
+var istock_previous_count = <%= @res['apis_video_count']['istock']['previous_count'] %>;;
+var pexels_offset = <%= @res['apis_video_count']['pexels']['offset'] %>;
+var pexels_previous_count = <%= @res['apis_video_count']['pexels']['previous_count'] %>;;
+var pixabay_offset = <%= @res['apis_video_count']['pixabay']['offset'] %>;
+var pixabay_previous_count = <%= @res['apis_video_count']['pixabay']['previous_count'] %>;;
+var shutterstock_offset = <%= @res['apis_video_count']['shutterstock']['offset'] %>;
+var shutterstock_previous_count = <%= @res['apis_video_count']['shutterstock']['previous_count'] %>;
+var storyblocks_offset = <%= @res['apis_video_count']['storyblocks']['previous_count'] %>;
+var storyblocks_previous_count = <%= @res['apis_video_count']['storyblocks']['previous_count'] %>;

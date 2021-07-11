@@ -1,0 +1,23 @@
+<div class="row video-class">
+  <%= render 'photo_data' %>
+</div>
+
+<script type="text/javascript">
+    var page = 2;
+    $(window).scroll(function() {
+        if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            var lastId = $(".well:last").attr("id");
+            $.ajax({
+                url: `<%= "#{url_path}?query=#{params[:query]}"%>&page=${page}`,
+                type: "get",
+                dataType: "script",
+                beforeSend: function (){
+                    $('.ajax-loader').show();
+                },
+                success: function (data) {
+                    console.log('success');
+                }
+            });
+        }
+    });
+</script>

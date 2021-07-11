@@ -1,0 +1,13 @@
+<% @videos.each do |res| %>
+  <%= link_to invideo_download_path(partner_video_id: res['partner_video_id'], video_link: res['video_link'], thumbnail_link: res['thumbnail_link'], source: res['source']), target: '_blank' do%>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail" style="height: 220px">
+        <%= image_tag(res['thumbnail_link'], size: 300)%>
+        <br>
+        <p style="font-size: 12px; text-align: center">
+          <%= truncate(res['partner_video_id'], length:35)  %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+<% end %>

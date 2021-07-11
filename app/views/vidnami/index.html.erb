@@ -1,0 +1,32 @@
+<div style="margin-left: 20px">
+  <h3>Vidnami version</h3>
+  <hr>
+  <div class="row">
+    <div class="col-md-11">
+      <%= form_with url: vidnami_path, method: :get, data: { turbolinks: false } do |form| %>
+        <%= form.label :query, "Search for:" %>
+        <%= form.text_field :query, placeholder: params[:query], style: 'width: 400px' %>
+        <%= form.submit "Search" %>
+      <% end %>
+    </div>
+    <div class="col-md-1">
+      <%= link_to :next, vidnami_path(query: params[:query], per_page: @per_page.to_i + 20), class: 'btn btn-primary', style: 'width: 100px' %>
+    </div>
+  </div>
+
+  <hr>
+  <div class="row">
+    <% @res['videos'].each do |video| %>
+      <%= link_to video['preview'], target: '_blank' do %>
+        <div class="col-md-3" style="margin-bottom: 20px">
+          <div style="border: 5px white solid">
+            <%= image_tag(video['thumb'], size: '415x220') %>
+          </div>
+          <div style="font-size: 15px; padding-left: 20px">
+            <%= truncate(video['info']['title'], length:50)  %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

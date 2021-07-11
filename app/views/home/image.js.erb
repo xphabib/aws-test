@@ -1,0 +1,4 @@
+$("#dream-1").append("<%= escape_javascript(render 'image_data', images: @res['results'].first(10)).html_safe %>");
+$("#dream-2").append("<%= escape_javascript(render 'image_data', images: @res['results'].first(20).last(10)).html_safe %>");
+$("#dream-3").append("<%= escape_javascript(render 'image_data', images: @res['results'].first(30).last(10)).html_safe %>");
+page++;

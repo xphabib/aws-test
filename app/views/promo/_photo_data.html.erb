@@ -1,0 +1,9 @@
+<% @res['response']['body']['photos'].each do |res| %>
+  <%= link_to res['rawUrl'], target: '_blank' do%>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail" style="height: 220px">
+        <%= image_tag(res['thumbnailUrl'], size: '280x400')%>
+      </div>
+    </div>
+  <% end %>
+<% end %>

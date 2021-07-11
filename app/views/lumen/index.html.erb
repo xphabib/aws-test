@@ -1,0 +1,45 @@
+<div class="btn-group" role="group" aria-label="...">
+  <% if @res['popular_queries'].present? %>
+    <% @res['popular_queries'].each do |query| %>
+      <%= link_to query.capitalize, lumen_path(query: query), class: "btn btn-default" %>
+    <% end %>
+  <% end %>
+</div>
+<br>
+<br>
+
+<div class="row video-class">
+  <% @res['results'].each do |res| %>
+    <%= link_to res['video']['render_url'], target: '_blank' do%>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail" style="height: 220px">
+          <%= image_tag(res['video']['poster_url'])%>
+          <br>
+          <p style="font-size: 12px; text-align: center">
+            <%= truncate(res['video']['title'], length:35)  %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+    var page = 2;
+    $(window).scroll(function() {
+        if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            var lastId = $(".well:last").attr("id");
+            $.ajax({
+                url: `<%= "#{url_path}?query=#{params[:query]}"%>&page=${page}`,
+                type: "get",
+                dataType: "script",
+                beforeSend: function (){
+                    $('.ajax-loader').show();
+                },
+                success: function (data) {
+                    page++;
+                }
+            });
+        }
+    });
+</script>

@@ -1,0 +1,15 @@
+<h3>Youtube Channels</h3>
+<br>
+<div class="row">
+  <%  @youtube_channels.each do |channel| %>
+    <%= link_to channel.link, target: '_blank' do%>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail" style="height: 60px; padding: 10px">
+          <p style="font-size: 12px">
+            <%= channel.title %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

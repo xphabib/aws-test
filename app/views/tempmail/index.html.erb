@@ -1,0 +1,21 @@
+<div>
+  <%= form_with url: tempmail_path, method: :get, data: { turbolinks: false } do |form| %>
+    <%= form.text_field :email, value: params[:email], placeholder: 'enter another email', style: 'width: 400px' %>
+    <%= form.submit "goto inbox" %>
+  <% end %>
+</div>
+
+<h2>
+  current email: <%= params[:email].present? ? params[:email] : session['email'] %>
+</h2>
+
+<%= link_to :change, change_mail_path, class: 'btn btn-primary' %>
+<%= link_to :refresh, tempmail_path, class: 'btn btn-primary' %>
+<% @res&.reverse.each do |mail| %>
+  <h3><%= mail['subject'] %></h3>
+  <h4>From: <%= mail['from'] %></h4>
+  <hr>
+  <p>
+    <%= raw(mail['html']) %>
+  </p>
+<% end %>

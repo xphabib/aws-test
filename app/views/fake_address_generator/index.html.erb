@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <h2>Fake Address Generator</h2>
+    <div>
+      <%= form_with url: fake_address_generator_path, method: :get do |form| %>
+        <div class="form-group">
+          <div class="col-md-6">
+            <%= select_tag("lang", options_for_select(AppSetting::DATA_LANG, params[:lang]), class: "form-control")%>
+          </div>
+          <div class="col-md-6">
+            <%= form.submit "New Address Generate", class: 'btn btn-default' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <br>
+    <br>
+    <h3 style="border-bottom: 1px solid black; border-top: 1px solid black;">Personal Details: <%= @res.first['name'] %></h3>
+    <div style="border: 1px solid black; padding: 10px">
+      <p>Name: <%= @res.first['name'] %></p>
+      <p>Street Address: <%= @res.first['streetAddress'] %></p>
+      <p>E-Mail: <%= @res.first['email'] %></p>
+      <p>Phone: <%= @res.first['phone'] %></p>
+      <p>Zip Code: <%= @res.first['postcode'] %></p>
+      <p>Date Of Birth: <%= @res.first['dob'] %></p>
+      <p>Age: <%= @res.first['age'] %></p>
+      <p>City: <%= @res.first['city'] %></p>
+      <p>Country: <%= @res.first['country'] %></p>
+      <p>Company: <%= @res.first['company'] %></p>
+      <p>Gender: <%= @res.first['gender'] %></p>
+      <p>Weight: <%= @res.first['weight'] %></p>
+      <p>Height: <%= @res.first['height'] %></p>
+      <p>Hair Color: <%= @res.first['hair'] %></p>
+      <p>Eye Color: <%= @res.first['eye'] %></p>
+    </div>
+
+    <h3 style="border-bottom: 1px solid black">Financial Details:</h3>
+    <div style="border: 1px solid black; padding: 10px">
+      <p>Bank Name: <%= @res.first['bank'] %></p>
+      <p>Bank Code: <%= @res.first['bcode'] %></p>
+      <p>IBAN: <%= @res.first['iban'] %></p>
+      <p>Account Number: <%= @res.first['accountNo'] %></p>
+      <p>Credit Card Type: <%= @res.first['credit']['type']  %></p>
+      <p>Credit Card Number: <%= @res.first['credit']['number'] %></p>
+      <p>Credit Card Expiry: <%= @res.first['credit']['expirationDate'] %></p>
+      <p>Credit Card CVV2: <%= Random.rand(999) %></p>
+    </div>
+
+    <h3 style="border-bottom: 1px solid black">Internet:</h3>
+    <div style="border: 1px solid black; padding: 10px">
+      <p>User Name: <%= @res.first['username'] %></p>
+      <p>Password: <%= @res.first['passw'] %></p>
+      <p>Safe Email: <%= @res.first['semail'] %></p>
+      <p>Mac Address: <%= @res.first['macad'] %></p>
+      <p>IPV4 Address: <%= @res.first['ipv4']  %></p>
+      <p>IPV6 Address: <%= @res.first['ipv6'] %></p>
+      <p>User Agent: <%= @res.first['uagent'] %></p>
+    </div>
+
+    <h3 style="border-bottom: 1px solid black">Employment Details:</h3>
+    <div style="border: 1px solid black; padding: 10px">
+      <p>Company Name: <%= @res.first['company'] %></p>
+      <p>Salary: <%= @res.first['salary'] %></p>
+      <p>Company Address: <%= @res.first['streetAddress'] %></p>
+      <p>Job Title: <%= @res.first['jobtitle'] %></p>
+      <p>Company Phone: <%= @res.first['phone']  %></p>
+      <p>Company Email: <%= @res.first['comemail'] %></p>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
